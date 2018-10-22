@@ -10,17 +10,17 @@ import (
 	"gocv.io/x/gocv"
 )
 
-type Pupil struct {
+type Circle struct {
 	image.Point
 	R int
 }
 
-func (p Pupil) String() string {
+func (p Circle) String() string {
 	return fmt.Sprintf("(%d,%d,%d)", p.X, p.Y, p.R)
 }
 
 // FindPupil locates a single pupil in the provided image, and returns it.
-func FindPupil(im gocv.Mat) (Pupil, Pupil) {
+func FindPupil(im gocv.Mat) (Circle, Circle) {
 	// This is the algorithm from "Accurate Iris Localization Using
 	// Edge Map Generation and Adaptive Circular Hough Transform for
 	// Less Constrained Iris Images", by Kumar, Asati and Gupta.
@@ -95,7 +95,7 @@ func calcCirclePoints(r int) []image.Point {
 //
 // Input pixels should be zero for non-candidate points, any other
 // value is assumed to be a point on the circle we're looking for.
-func findBestCircle(im gocv.Mat) (Pupil, Pupil) {
+func findBestCircle(im gocv.Mat) (Circle, Circle) {
 	st := time.Now()
 	// This algorithm is very expensive in the number of pixels
 	// processed. To work around this, we first run it on a small
@@ -110,7 +110,7 @@ func findBestCircle(im gocv.Mat) (Pupil, Pupil) {
 	//
 	// Keep track of the best circle we've found so far.
 	var (
-		winner      Pupil
+		winner      Circle
 		winnerVotes int16
 	)
 
@@ -189,7 +189,7 @@ func findBestCircle(im gocv.Mat) (Pupil, Pupil) {
 	// centers that are "near" our approximation, to cut down
 	// drastically on memory and CPU cost.
 
-	approximate := Pupil{
+	approximate := Circle{
 		Point: image.Point{
 			X: int(float64(winner.X) * mult),
 			Y: int(float64(winner.Y) * mult),
@@ -214,7 +214,7 @@ func findBestCircle(im gocv.Mat) (Pupil, Pupil) {
 	// even on a very large image, so we can just search it
 	// exhaustively, and pick the position that results in the most
 	// non-zero pixels on the resulting circle.
-	winner = Pupil{}
+	winner = Circle{}
 	winnerVotes = 0
 
 	for r := approximate.R - uncertainty; r < approximate.R+uncertainty; r++ {

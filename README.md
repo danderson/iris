@@ -24,6 +24,14 @@ away from the pupil center than the pupil-iris boundary.
 
 - [Accurate Iris Localization Using Edge Map Generation and Adaptive Circular Hough Transform for Less Constrained Iris Images](http://www.iaescore.com/journals/index.php/IJECE/article/viewFile/732/489)
 
+A bunch of constants in the algorithm ask you to have a consistent
+dataset, in terms of where the iris is likely to be in the image and
+how bit it's likely to be. That means implementations are going to get
+tied to the specific physical capture device, to some extent.
+
+For now I'm just using generous numbers, at the expense of
+performance.
+
 ### Random other computer vision names I need to remember
 
 - Edge detection

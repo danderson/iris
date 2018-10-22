@@ -16,9 +16,7 @@ func main() {
 	im := gocv.IMRead(os.Args[1], gocv.IMReadGrayScale)
 	defer im.Close()
 
-	st := time.Now()
 	appx, p := location.FindPupil(im)
-	fmt.Println("total:", time.Since(st))
 
 	gocv.CvtColor(im, &im, gocv.ColorGrayToBGR)
 	im2 := im.Clone()
