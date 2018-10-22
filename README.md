@@ -1,3 +1,8 @@
+# Iris recognition
+
+I'm just playing with iris recognition. You probably shouldn't use
+this code for anything.
+
 # Random bag of notes
 
 ## The eye
