@@ -9,7 +9,7 @@ import (
 	"gocv.io/x/gocv"
 
 	"go.universe.tf/iris/internal/debug"
-	"go.universe.tf/iris/internal/pupil"
+	"go.universe.tf/iris/internal/location"
 )
 
 func main() {
@@ -17,7 +17,7 @@ func main() {
 	defer im.Close()
 
 	st := time.Now()
-	appx, p := pupil.Find(im)
+	appx, p := location.FindPupil(im)
 	fmt.Println("total:", time.Since(st))
 
 	gocv.CvtColor(im, &im, gocv.ColorGrayToBGR)

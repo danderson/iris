@@ -1,4 +1,4 @@
-package pupil
+package location
 
 import (
 	"fmt"
@@ -19,10 +19,8 @@ func (p Pupil) String() string {
 	return fmt.Sprintf("(%d,%d,%d)", p.X, p.Y, p.R)
 }
 
-// Find locates a single pupil in the provided image, and returns it.
-//
-//
-func Find(im gocv.Mat) (Pupil, Pupil) {
+// FindPupil locates a single pupil in the provided image, and returns it.
+func FindPupil(im gocv.Mat) (Pupil, Pupil) {
 	// This is the algorithm from "Accurate Iris Localization Using
 	// Edge Map Generation and Adaptive Circular Hough Transform for
 	// Less Constrained Iris Images", by Kumar, Asati and Gupta.
